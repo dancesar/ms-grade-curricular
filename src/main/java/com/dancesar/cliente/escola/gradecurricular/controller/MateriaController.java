@@ -1,5 +1,6 @@
 package com.dancesar.cliente.escola.gradecurricular.controller;
 
+import com.dancesar.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.dancesar.cliente.escola.gradecurricular.entity.MateriaEntity;
 import com.dancesar.cliente.escola.gradecurricular.repository.IMateriaRepository;
 import com.dancesar.cliente.escola.gradecurricular.service.IMateriaService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,13 +33,13 @@ public class MateriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> cadastrarMateria(@RequestBody MateriaEntity materiaEntity){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.iMateriaService.cadastrarMateria(materiaEntity));
+    public ResponseEntity<Boolean> cadastrarMateria(@Valid @RequestBody MateriaDto materiaDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.iMateriaService.cadastrarMateria(materiaDto));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Boolean> atualizaMateria(@RequestBody MateriaEntity materiaEntity){
-        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.atualizar(materiaEntity));
+    public ResponseEntity<Boolean> atualizaMateria(@Valid @RequestBody MateriaDto materiaDto){
+        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.atualizar(materiaDto));
     }
 
     @DeleteMapping("{id}")

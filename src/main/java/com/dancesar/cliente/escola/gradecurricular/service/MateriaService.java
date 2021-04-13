@@ -1,8 +1,10 @@
 package com.dancesar.cliente.escola.gradecurricular.service;
 
+import com.dancesar.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.dancesar.cliente.escola.gradecurricular.entity.MateriaEntity;
 import com.dancesar.cliente.escola.gradecurricular.exception.MateriaException;
 import com.dancesar.cliente.escola.gradecurricular.repository.IMateriaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,10 @@ public class MateriaService implements  IMateriaService{
     private IMateriaRepository iMateriaRepository;
 
     @Override
-    public Boolean cadastrarMateria(MateriaEntity materiaEntity) {
+    public Boolean cadastrarMateria(MateriaDto materiaDto) {
         try {
+            ModelMapper mapper = new ModelMapper();
+            MateriaEntity materiaEntity = mapper.map(materiaDto, MateriaEntity.class);
             this.iMateriaRepository.save(materiaEntity);
             return true;
         } catch (Exception e) {
@@ -52,25 +56,21 @@ public class MateriaService implements  IMateriaService{
     }
 
     @Override
-    public Boolean atualizar(MateriaEntity materiaEntity) {
+    public Boolean atualizar(MateriaDto materiaDto) {
         try {
-            Optional<MateriaEntity> materiaOptional = this.iMateriaRepository.findById(materiaEntity.getId());
+            ModelMapper mapper = new ModelMapper();
+            this.consultar(materiaDto.getId());
 
-            if(materiaOptional.isPresent()) {
-                MateriaEntity materiaAtualizada = materiaOptional.get();
+            MateriaEntity materiaAtualizada = mapper.map(materiaDto, MateriaEntity.class);
 
-                materiaAtualizada.setNome(materiaEntity.getNome());
-                materiaAtualizada.setHoras(materiaEntity.getHoras());
-                materiaAtualizada.setCodigo(materiaEntity.getCodigo());
-                materiaAtualizada.setFrequencia(materiaEntity.getFrequencia());
+            this.iMateriaRepository.save(materiaAtualizada);
 
-                this.iMateriaRepository.save(materiaAtualizada);
+            return Boolean.TRUE;
 
-                return true;
-            }
-        return false;
+        } catch (MateriaException m) {
+            throw m;
         } catch (Exception e) {
-            return false;
+            throw e;
         }
     }
 
