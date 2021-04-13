@@ -27,7 +27,7 @@ public class MateriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MateriaEntity> consultaMateria(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(this.materiaRepository.findById(id).get());
+        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.consultar(id));
     }
 
     @PostMapping

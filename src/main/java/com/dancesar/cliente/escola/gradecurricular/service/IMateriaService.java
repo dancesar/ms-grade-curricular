@@ -10,6 +10,8 @@ public interface IMateriaService {
 
     public List<MateriaEntity> Listar();
 
+    public MateriaEntity consultar(final Long id);
+
     public Boolean atualizar(final MateriaEntity materiaEntity);
 
     public Boolean excluir(final Long id);
