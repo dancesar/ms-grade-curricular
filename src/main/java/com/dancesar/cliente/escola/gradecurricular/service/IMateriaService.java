@@ -9,9 +9,9 @@ public interface IMateriaService {
 
     public Boolean cadastrarMateria(final MateriaDto materiaDto);
 
-    public List<MateriaEntity> Listar();
+    public List<MateriaDto> Listar();
 
-    public MateriaEntity consultar(final Long id);
+    public MateriaDto consultar(final Long id);
 
     public Boolean atualizar(final MateriaDto materiaDto);
 

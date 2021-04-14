@@ -24,6 +24,6 @@ public class MateriaDto {
     private String codigo;
 
     @Min(value = 1, message = "Permitido o mínimo de 1 vez ao ano.")
-    @Max(value = 2, message = "Permitido o máximo de 2 vezes ao anp.")
+    @Max(value = 2, message = "Permitido o máximo de 2 vezes ao ano.")
     private Integer frequencia;
 }
