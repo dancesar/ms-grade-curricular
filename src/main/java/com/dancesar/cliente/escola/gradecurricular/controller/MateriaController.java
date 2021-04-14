@@ -2,9 +2,11 @@ package com.dancesar.cliente.escola.gradecurricular.controller;
 
 import com.dancesar.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.dancesar.cliente.escola.gradecurricular.entity.MateriaEntity;
+import com.dancesar.cliente.escola.gradecurricular.model.Response;
 import com.dancesar.cliente.escola.gradecurricular.repository.IMateriaRepository;
 import com.dancesar.cliente.escola.gradecurricular.service.IMateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +30,12 @@ public class MateriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MateriaDto> consultaMateria(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.consultar(id));
+    public ResponseEntity<Response<MateriaDto>> consultaMateria(@PathVariable Long id){
+        Response<MateriaDto> response = new Response<>();
+        response.setData(this.iMateriaService.consultar(id));
+        response.setStatusCode(HttpStatus.OK.value());
+        response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).consultaMateria(id)).withSelfRel());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
