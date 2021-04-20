@@ -19,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
@@ -57,7 +58,7 @@ public class MateriaControllerUnitTest {
     public void testListarMaterias(){
         Mockito.when(this.materiaService.listar()).thenReturn(new ArrayList<MateriaDto>());
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.GET, null,
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://127.0.0.1:" + this.port + "/materia/", HttpMethod.GET, null,
                                                                                     new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
@@ -65,9 +66,9 @@ public class MateriaControllerUnitTest {
 
     @Test
     public void testConsultarMaterias(){
-        Mockito.when(this.materiaService.listar()).thenReturn(new ArrayList<MateriaDto>());
+        Mockito.when(this.materiaService.consultar(1L)).thenReturn(materiaDto);
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.GET, null,
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://http://127.0.0.1:" + this.port + "/materia/", HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
@@ -77,28 +78,32 @@ public class MateriaControllerUnitTest {
     public void testCadastrarMaterias(){
         Mockito.when(this.materiaService.listar()).thenReturn(new ArrayList<MateriaDto>());
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.GET, null,
-                new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
+        HttpEntity<MateriaDto> request = new HttpEntity<>(materiaDto);
+
+        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.POST, null,
+                new ParameterizedTypeReference<Response<Boolean>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
     }
 
     @Test
     public void testAtualizarMaterias(){
-        Mockito.when(this.materiaService.listar()).thenReturn(new ArrayList<MateriaDto>());
+        Mockito.when(this.materiaService.atualizar(materiaDto)).thenReturn(Boolean.TRUE);
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.GET, null,
-                new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
+        HttpEntity<MateriaDto> request = new HttpEntity<>(materiaDto);
+
+        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange("http://http://127.0.0.1:" + this.port + "/materia/", HttpMethod.PUT, null,
+                new ParameterizedTypeReference<Response<Boolean>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
     }
 
     @Test
     public void testExcluirMaterias(){
-        Mockito.when(this.materiaService.listar()).thenReturn(new ArrayList<MateriaDto>());
+        Mockito.when(this.materiaService.excluir(1L)).thenReturn(Boolean.TRUE);
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/", HttpMethod.GET, null,
-                new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
+        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange("http://http://127.0.0.1:" + this.port + "/materia/", HttpMethod.DELETE, null,
+                new ParameterizedTypeReference<Response<Boolean>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
     }
@@ -107,7 +112,7 @@ public class MateriaControllerUnitTest {
     public void testConsultarPorHoraMinima(){
         Mockito.when(this.materiaService.listarPorHorarioMinimo(64)).thenReturn(new ArrayList<MateriaDto>());
 
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://192.168.0.8:" + this.port + "/materia/horario-minimo/64", HttpMethod.GET, null,
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange("http://http://127.0.0.1:" + this.port + "/materia/horario-minimo/64", HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {});
         assertNotNull(materias.getBody().getData());
         assertEquals(200, materias.getBody().getStatusCode());
