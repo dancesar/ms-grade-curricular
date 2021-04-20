@@ -9,4 +9,9 @@ import org.springframework.hateoas.RepresentationModel;
 public class Response<T> extends RepresentationModel<Response<T>> {
     private Integer statusCode;
     private T data;
+    private Long timeStamp;
+
+    public Response(){
+        this.timeStamp = System.currentTimeMillis();
+    }
 }

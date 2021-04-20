@@ -1,5 +1,4 @@
 #Arquivos Diversos
-*.yml
 .gitignore
 /HELP.md
 /mvnw
