@@ -12,6 +12,8 @@ public interface IMateriaService {
 
     public MateriaDto consultar(final Long id);
 
+    public List<MateriaDto> listarPorHorarioMinimo(int horaMinima);
+
     public Boolean atualizar(final MateriaDto materiaDto);
 
     public Boolean excluir(final Long id);

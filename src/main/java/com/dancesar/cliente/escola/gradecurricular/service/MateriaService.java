@@ -70,6 +70,11 @@ public class MateriaService implements  IMateriaService{
         }
     }
 
+    @Override
+    public List<MateriaDto> listarPorHorarioMinimo(int horaMinima) {
+        return this.mapper.map(this.iMateriaRepository.findByHoraMinima(horaMinima), new TypeToken<List<MateriaDto>>() {}.getType());
+    }
+
     @Caching(evict = {
             @CacheEvict(key = "#materia.id"),
             @CacheEvict(value = "escola", key = "#escola.id")})
