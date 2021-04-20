@@ -1,7 +1,6 @@
 package com.dancesar.cliente.escola.gradecurricular.service;
 
 import com.dancesar.cliente.escola.gradecurricular.dto.MateriaDto;
-import com.dancesar.cliente.escola.gradecurricular.entity.MateriaEntity;
 
 import java.util.List;
 

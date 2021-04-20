@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_materia")
@@ -39,4 +40,8 @@ public class MateriaEntity implements Serializable {
     @JsonInclude(Include.NON_EMPTY)
     @Column(name = "freq")
     private Integer frequencia;
+
+    @JsonInclude(Include.NON_EMPTY)
+    @Column(name = "dataCadastro")
+    private LocalDateTime dtCadastro = LocalDateTime.now();
 }

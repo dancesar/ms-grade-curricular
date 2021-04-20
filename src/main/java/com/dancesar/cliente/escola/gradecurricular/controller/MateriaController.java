@@ -1,9 +1,7 @@
 package com.dancesar.cliente.escola.gradecurricular.controller;
 
 import com.dancesar.cliente.escola.gradecurricular.dto.MateriaDto;
-import com.dancesar.cliente.escola.gradecurricular.entity.MateriaEntity;
 import com.dancesar.cliente.escola.gradecurricular.model.Response;
-import com.dancesar.cliente.escola.gradecurricular.repository.IMateriaRepository;
 import com.dancesar.cliente.escola.gradecurricular.service.IMateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -17,9 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/materia")
 public class MateriaController {
-
-    @Autowired
-    private IMateriaRepository materiaRepository;
 
     @Autowired
     private IMateriaService iMateriaService;
