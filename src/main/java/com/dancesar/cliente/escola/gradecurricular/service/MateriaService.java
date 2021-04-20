@@ -46,7 +46,7 @@ public class MateriaService implements  IMateriaService{
 
     @CachePut(unless = "#result.size()<3")
     @Override
-    public List<MateriaDto> Listar() {
+    public List<MateriaDto> listar() {
         try {
             return this.mapper.map(this.iMateriaRepository.findAll(), new TypeToken<List<MateriaDto>>() {}.getType());
         } catch (Exception e){

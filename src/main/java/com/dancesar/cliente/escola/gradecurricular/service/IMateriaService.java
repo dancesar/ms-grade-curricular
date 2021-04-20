@@ -8,7 +8,7 @@ public interface IMateriaService {
 
     public Boolean cadastrarMateria(final MateriaDto materiaDto);
 
-    public List<MateriaDto> Listar();
+    public List<MateriaDto> listar();
 
     public MateriaDto consultar(final Long id);
 

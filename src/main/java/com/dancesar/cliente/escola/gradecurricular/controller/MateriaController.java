@@ -21,7 +21,7 @@ public class MateriaController {
 
     @GetMapping
     public ResponseEntity<List<MateriaDto>> listaMaterias(){
-        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.Listar());
+        return ResponseEntity.status(HttpStatus.OK).body(this.iMateriaService.listar());
     }
 
     @GetMapping("/{id}")
